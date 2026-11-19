@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Logo } from './logo'
 import { NewsletterForm } from './forms/newsletter-form'
 import { LanguageSwitcher } from './site-header'
-import { TravelPattern } from './ui'
+import { TravelPattern, Words } from './ui'
 import { site } from '@/lib/site-data'
 
 const columns = [
@@ -50,8 +50,11 @@ export function SiteFooter() {
         <div className="f-top">
           <div>
             <Logo inverted />
-            <p className="f-tag">
-              Empowering the vulnerable. <em>Transforming communities.</em>
+            <p className="f-tag rise">
+              <Words text="Empowering the vulnerable." />{' '}
+              <em>
+                <Words text="Transforming communities." start={3} />
+              </em>
             </p>
           </div>
           <div className="flex flex-col gap-3">

@@ -37,7 +37,7 @@ export default function GetInvolvedPage() {
                   <span className={p.brand ? 'card-ic' : 'card-ic navy'}>
                     <p.icon strokeWidth={1.8} aria-hidden="true" />
                   </span>
-                  <h2 className="mb-2 text-[1.375rem] tracking-[-0.02em]">{p.title}</h2>
+                  <h2 className="mb-2 text-[1.1875rem] tracking-[-0.02em]">{p.title}</h2>
                   <p className="m-0">{p.body}</p>
                   <span className="link-arrow mt-auto pt-5">Go</span>
                 </a>

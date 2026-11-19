@@ -1,19 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { GraduationCap, MapPin, Users } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { ButtonLink, SectionHead, TextLink, TravelPattern, VerificationBadge, Words } from './ui'
 import { CountUp, Reveal } from './motion'
 import { metrics, metricsAsOf, partners, programmes, site } from '@/lib/site-data'
 
 export function HomeHero() {
+  const stats = metrics.slice(0, 3)
   return (
     <section className="hero">
-      <div className="wrap hero-grid">
-        <div>
-          <p className="loc">
-            <MapPin aria-hidden="true" />
-            Kaduna, Nigeria <span className="muted">· Since {site.founded}</span>
-          </p>
+      <div className="hero-bg" aria-hidden="true">
+        <Image
+          src="/images/hero-digital-skills.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[70%_center]"
+        />
+      </div>
+      <div className="hero-shade" aria-hidden="true" />
+      <div className="wrap hero-inner">
+        <div className="hero-copy">
+          <p className="hero-kicker">Ihifix Foundation · Since {site.founded}</p>
           <h1>
             <Words text="Empowering the vulnerable." />{' '}
             <em>
@@ -25,57 +34,33 @@ export function HomeHero() {
             skills and a solution-based mindset, so they can live dignified lives.
           </p>
           <div className="btn-row">
-            <ButtonLink href="/partner-with-us">Partner with us</ButtonLink>
-            <ButtonLink href="/donate" variant="ghost">
-              Donate
-            </ButtonLink>
-          </div>
-          <ul className="trust">
-            <li>Community-led since {site.founded}</li>
-            <li>Independent board</li>
-            <li>Every figure sourced</li>
-          </ul>
-          <p className="mt-6 text-sm text-text-3">
-            Looking for support?{' '}
-            <Link href="/get-involved#apply" className="inline-link">
-              Find a programme near you
+            <Link href="/partner-with-us" className="btn btn-primary btn-arrow">
+              Partner with us
+              <ArrowRight aria-hidden="true" />
             </Link>
+            <Link href="/donate" className="btn btn-outline-light">
+              Donate
+            </Link>
+          </div>
+          <p className="hero-help">
+            Looking for support? <Link href="/get-involved#apply">Find a programme near you</Link>
           </p>
         </div>
 
-        <div className="hero-art">
-          <div className="hero-photo">
-            <Image
-              src="/images/hero-digital-skills.png"
-              alt="Young Nigerian women and men learning digital skills together on laptops in a training room."
-              fill
-              priority
-              sizes="(min-width: 960px) 50vw, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="float f1">
-            <span className="ic">
-              <Users strokeWidth={1.8} aria-hidden="true" />
-            </span>
-            <span>
-              <b>
-                <CountUp value={metrics[0].value} /> lives impacted
-              </b>
-              <small>Training, support and advocacy</small>
-            </span>
-          </div>
-          <div className="float f2 navy">
-            <span className="ic">
-              <GraduationCap strokeWidth={1.8} aria-hidden="true" />
-            </span>
-            <span>
-              <b>{metrics[2].value} digital learners</b>
-              <small>Across 8 states with Google</small>
-            </span>
-          </div>
-        </div>
+        <dl className="hero-stats">
+          {stats.map((m) => (
+            <div key={m.label}>
+              <dt>{m.label}</dt>
+              <dd>
+                <CountUp value={m.value} />
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
+      <a href="#impact" className="hero-scroll" aria-label="Scroll to our impact">
+        <span aria-hidden="true" />
+      </a>
     </section>
   )
 }
@@ -83,7 +68,7 @@ export function HomeHero() {
 export function ImpactStrip() {
   const shown = metrics.slice(0, 4)
   return (
-    <section aria-labelledby="impact-strip" className="section">
+    <section id="impact" aria-labelledby="impact-strip" className="section">
       <div className="wrap">
         <SectionHead
           id="impact-strip"
@@ -123,7 +108,7 @@ export function ProgrammesGrid() {
         />
         <ul className="cards cards-2 m-0 list-none p-0">
           {programmes.map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={(i % 2) * 80}>
+            <Reveal as="li" key={p.slug}>
               <Link href={`/programmes/${p.slug}`} className="prog">
                 <div className="prog-media">
                   <Image src={p.image} alt="" fill sizes="(min-width: 700px) 50vw, 100vw" className="object-cover" />

@@ -40,7 +40,7 @@ export default function ProgrammesPage() {
                   {p.results.map((r) => (
                     <div key={r.label} className="flex flex-col">
                       <dt className="sr-only">{r.label}</dt>
-                      <dd className="m-0 text-[2rem] font-bold leading-none tracking-[-0.035em]">{r.value}</dd>
+                      <dd className="m-0 text-[1.625rem] font-bold leading-none tracking-[-0.035em]">{r.value}</dd>
                       <dd className="m-0 mt-2 max-w-52 text-sm text-text-2">{r.label}</dd>
                     </div>
                   ))}

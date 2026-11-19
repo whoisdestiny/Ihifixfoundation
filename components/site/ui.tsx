@@ -195,7 +195,7 @@ export function Initials({ initials, name, size = 'md' }: { initials: string; na
       aria-label={`Portrait placeholder for ${name}`}
       className={cn(
         'inline-flex shrink-0 items-center justify-center rounded-full font-bold tracking-tight',
-        size === 'lg' ? 'size-20 bg-primary text-xl text-primary-foreground' : 'size-12 bg-background text-base text-foreground',
+        size === 'lg' ? 'size-20 bg-primary text-lg text-primary-foreground' : 'size-12 bg-background text-base text-foreground',
       )}
     >
       {initials}

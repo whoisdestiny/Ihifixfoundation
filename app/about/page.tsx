@@ -47,11 +47,11 @@ export default function AboutPage() {
             <Reveal className="card on-dark has-pattern">
               <TravelPattern id="vision" />
               <dt className="eyebrow">Vision</dt>
-              <dd className="m-0 text-[1.625rem] font-bold leading-tight tracking-[-0.025em]">{site.vision}</dd>
+              <dd className="m-0 text-[1.375rem] font-bold leading-tight tracking-[-0.025em]">{site.vision}</dd>
             </Reveal>
             <Reveal className="card">
               <dt className="eyebrow">Mission</dt>
-              <dd className="m-0 text-lg leading-relaxed text-foreground">{site.mission}</dd>
+              <dd className="m-0 text-base leading-relaxed text-foreground">{site.mission}</dd>
             </Reveal>
           </dl>
         </div>
@@ -123,13 +123,13 @@ export default function AboutPage() {
               <Reveal as="li" key={l.name} className="card flex items-center gap-5">
                 <Initials initials={l.initials} name={l.name} size="lg" />
                 <div>
-                  <h3 className="m-0 text-[1.375rem]">{l.name}</h3>
+                  <h3 className="m-0 text-[1.1875rem]">{l.name}</h3>
                   <p className="m-0">{l.role}</p>
                 </div>
               </Reveal>
             ))}
           </ul>
-          <h3 className="mb-5 mt-16 text-[1.5rem] tracking-[-0.02em]">Board of directors</h3>
+          <h3 className="mb-5 mt-16 text-[1.3rem] tracking-[-0.02em]">Board of directors</h3>
           <ul className="cards cards-3 m-0 list-none p-0">
             {board.map((b) => (
               <li key={b.name} className="card flex items-center gap-4 p-4!">

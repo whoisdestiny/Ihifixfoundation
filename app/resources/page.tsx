@@ -35,7 +35,7 @@ export default function ResourcesPage() {
           </ul>
           <div className="callout mt-4 flex flex-col items-start gap-3 p-7! md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="m-0 text-[1.25rem] tracking-[-0.02em] text-foreground">Need a document now?</h2>
+              <h2 className="m-0 text-[1.125rem] tracking-[-0.02em] text-foreground">Need a document now?</h2>
               <p className="m-0 mt-1">Partners and media can request any report ahead of publication.</p>
             </div>
             <TextLink href="/contact">Request a report</TextLink>

@@ -44,10 +44,10 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
             <div>
               <p className="eyebrow">The challenge</p>
               <h2 className="sr-only">The challenge</h2>
-              <p className="m-0 text-[1.375rem] font-semibold leading-snug tracking-[-0.015em]">{p.problem}</p>
+              <p className="m-0 text-[1.1875rem] font-semibold leading-snug tracking-[-0.015em]">{p.problem}</p>
             </div>
             <div>
-              <h2 className="mb-6 text-[1.75rem]">
+              <h2 className="mb-6 text-[1.5rem]">
                 <Words text="What we do" />
               </h2>
               <ul className="checklist text-foreground">
@@ -57,7 +57,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-[1.75rem]">
+              <h2 className="mb-6 text-[1.5rem]">
                 <Words text="How it works" />
               </h2>
               <ol className="steps">
@@ -77,7 +77,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
               <div className="flex flex-col gap-5">
                 {p.results.map((r) => (
                   <p key={r.label} className="m-0 flex flex-col">
-                    <span className="text-[2.5rem] font-bold leading-none tracking-[-0.035em] text-primary-foreground">{r.value}</span>
+                    <span className="text-[2rem] font-bold leading-none tracking-[-0.035em] text-primary-foreground">{r.value}</span>
                     <span className="mt-2 text-on-primary-muted">{r.label}</span>
                   </p>
                 ))}
@@ -106,7 +106,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
         <div className="wrap">
           <figure className="m-0 max-w-4xl">
             <p className="eyebrow">In their words</p>
-            <blockquote className="m-0 text-[clamp(1.5rem,1.1rem+1.4vw,2.25rem)] font-bold leading-[1.2] tracking-[-0.025em] text-balance">
+            <blockquote className="m-0 text-[clamp(1.3rem,1rem+1vw,1.75rem)] font-bold leading-[1.2] tracking-[-0.025em] text-balance">
               &ldquo;{p.story.quote}&rdquo;
             </blockquote>
             <figcaption className="mt-5 text-text-2">{p.story.attribution}</figcaption>
@@ -129,7 +129,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
 
       <section className="section tint compact">
         <div className="wrap">
-          <h2 className="mb-8 text-[1.75rem]">
+          <h2 className="mb-8 text-[1.5rem]">
             <Words text="Other programmes" />
           </h2>
           <ul className="cards cards-3 m-0 list-none p-0">
