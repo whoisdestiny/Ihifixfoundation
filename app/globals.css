@@ -582,7 +582,8 @@
     inset: 0;
     z-index: -1;
     background:
-      linear-gradient(90deg, rgba(5, 20, 90, 0.95) 0%, rgba(5, 20, 90, 0.84) 32%, rgba(16, 36, 140, 0.5) 60%, rgba(5, 20, 90, 0.12) 88%),
+      linear-gradient(90deg, rgba(5, 20, 90, 0.96) 0%, rgba(5, 20, 90, 0.9) 36%, rgba(10, 28, 120, 0.62) 62%, rgba(5, 20, 90, 0.2) 90%),
+      linear-gradient(180deg, rgba(3, 13, 63, 0.55) 0%, rgba(3, 13, 63, 0) 30%),
       linear-gradient(0deg, rgba(3, 13, 63, 0.75) 0%, rgba(3, 13, 63, 0) 38%);
   }
   .hero-inner {
@@ -788,6 +789,105 @@
     overflow: hidden;
     background: var(--surface);
   }
+  .page-hero-media {
+    position: relative;
+  }
+  .page-hero-media.has-inset {
+    margin-bottom: 12%;
+  }
+  .page-hero-inset {
+    position: absolute;
+    left: 6%;
+    bottom: -14%;
+    width: 44%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow:
+      0 0 0 6px var(--bg),
+      0 18px 40px -12px rgba(5, 20, 90, 0.35);
+  }
+  /* ---- Team cards: photo on top, name, orange role, short bio */
+  .team-grid {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 560px) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1000px) {
+    .team-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+  }
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+    background: var(--bg);
+    border: 1px solid var(--line);
+  }
+  .team-photo {
+    position: relative;
+    aspect-ratio: 296 / 260;
+    overflow: hidden;
+    background: #fff;
+  }
+  .team-photo img {
+    transition: scale 0.6s var(--ease-out);
+  }
+  .team-card:hover .team-photo img {
+    scale: 1.04;
+  }
+  .team-body {
+    flex: 1;
+    padding: var(--space-5) var(--space-6) var(--space-6);
+    background: var(--surface);
+  }
+  .team-body h3 {
+    margin: 0;
+    font-size: var(--fs-h3);
+    letter-spacing: -0.015em;
+  }
+  .team-role {
+    margin: 6px 0 var(--space-3);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-text);
+  }
+  .team-bio {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+
+  .avatar {
+    position: relative;
+    display: inline-block;
+    flex: none;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--surface);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .card .avatar {
+    background: var(--bg);
+  }
+  .avatar img {
+    scale: 1.3;
+    transform-origin: 50% 12%;
+  }
   @media (min-width: 900px) {
     .page-hero {
       padding: calc(var(--header) + var(--space-20)) 0 96px;
@@ -795,6 +895,10 @@
     .page-hero-grid.has-art {
       grid-template-columns: 1.2fr 1fr;
       gap: 56px;
+    }
+    .page-hero-inset {
+      left: -10%;
+      width: 46%;
     }
   }
 
@@ -1644,26 +1748,72 @@
   .marquee-mask {
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   }
-  .partner-pill {
+  .partner-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60px;
-    min-width: 12rem;
+    gap: 12px;
+    height: 88px;
+    min-width: 12.5rem;
     padding: 0 var(--space-8);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-    color: var(--text);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-    transition:
-      background-color 0.2s,
-      color 0.2s;
+    border-radius: var(--radius-card);
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition: box-shadow 0.25s ease;
   }
-  .partner-pill:hover {
-    background: var(--surface-2);
-    color: var(--brand-text);
+  .partner-logo:hover {
+    box-shadow:
+      inset 0 0 0 1px var(--line),
+      0 10px 24px -14px rgba(5, 20, 90, 0.35);
+  }
+  .partner-logo img {
+    width: auto;
+    height: 40px;
+    max-width: 150px;
+    object-fit: contain;
+  }
+  /* Square marks (UK aid, Kaduna crest) need more height to read at the same visual weight */
+  .partner-logo img[src*='ukaid'],
+  .partner-logo img[src*='kaduna'] {
+    height: 60px;
+  }
+  .partner-logo-text {
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+  .partner-cell {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .partner-cell-logo {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 44px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .partner-cell-text {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+  .partner-cell-logo img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   /* ---- Word rise + reveal
@@ -1751,6 +1901,16 @@
   }
   .page-hero-art {
     animation: art-in 1.3s var(--ease-out) both 0.35s;
+  }
+  .page-hero-inset {
+    animation:
+      fade-up 0.9s var(--ease-out) both 0.95s,
+      inset-float 7s ease-in-out 2s infinite alternate;
+  }
+  @keyframes inset-float {
+    to {
+      translate: 0 -10px;
+    }
   }
   .js section:not(.hero, .page-hero) h2 .w > span {
     transform: translateY(115%);

@@ -99,7 +99,12 @@ export function PageHero({
   accent?: string
   intro?: string
   crumbs: { label: string; href?: string }[]
-  art?: { src: string; alt: string }
+  art?: {
+    src: string
+    alt: string
+    position?: string
+    inset?: { src: string; alt: string; position?: string }
+  }
   children?: React.ReactNode
 }) {
   const titleWords = title.split(' ').length
@@ -116,11 +121,7 @@ export function PageHero({
               {crumbs.map((c) => (
                 <li key={c.label} className="flex items-center gap-2">
                   <ChevronRight aria-hidden="true" />
-                  {c.href ? (
-                    <Link href={c.href}>{c.label}</Link>
-                  ) : (
-                    <span aria-current="page">{c.label}</span>
-                  )}
+                  {c.href ? <Link href={c.href}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}
                 </li>
               ))}
             </ol>
@@ -140,8 +141,28 @@ export function PageHero({
           {children && <div className="btn-row">{children}</div>}
         </div>
         {art && (
-          <div className="page-hero-art">
-            <Image src={art.src} alt={art.alt} fill priority sizes="(min-width: 900px) 40vw, 100vw" className="object-cover" />
+          <div className={cn('page-hero-media', art.inset && 'has-inset')}>
+            <div className="page-hero-art">
+              <Image
+                src={art.src}
+                alt={art.alt}
+                fill
+                priority
+                sizes="(min-width: 900px) 40vw, 100vw"
+                className={cn('object-cover', art.position)}
+              />
+            </div>
+            {art.inset && (
+              <div className="page-hero-inset">
+                <Image
+                  src={art.inset.src}
+                  alt={art.inset.alt}
+                  fill
+                  sizes="(min-width: 900px) 18vw, 45vw"
+                  className={cn('object-cover', art.inset.position)}
+                />
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -171,7 +192,15 @@ export function ButtonLink({
   )
 }
 
-export function TextLink({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
+export function TextLink({
+  href,
+  children,
+  className,
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
   return (
     <Link href={href} className={cn('link-arrow', className)}>
       {children}
@@ -188,14 +217,34 @@ export function VerificationBadge({ status, className }: { status: Metric['statu
   )
 }
 
-export function Initials({ initials, name, size = 'md' }: { initials: string; name: string; size?: 'md' | 'lg' }) {
+export function Initials({
+  initials,
+  name,
+  size = 'md',
+  photo,
+}: {
+  initials: string
+  name: string
+  size?: 'md' | 'lg'
+  /** Portrait image; falls back to initials when absent. */
+  photo?: string
+}) {
+  if (photo) {
+    return (
+      <span className={cn('avatar', size === 'lg' ? 'size-24' : 'size-16')}>
+        <Image src={photo} alt={`Portrait of ${name}`} fill sizes="96px" className="object-cover object-[50%_18%]" />
+      </span>
+    )
+  }
   return (
     <span
       role="img"
       aria-label={`Portrait placeholder for ${name}`}
       className={cn(
         'inline-flex shrink-0 items-center justify-center rounded-full font-bold tracking-tight',
-        size === 'lg' ? 'size-20 bg-primary text-lg text-primary-foreground' : 'size-12 bg-background text-base text-foreground',
+        size === 'lg'
+          ? 'size-20 bg-primary text-lg text-primary-foreground'
+          : 'size-12 bg-background text-base text-foreground',
       )}
     >
       {initials}

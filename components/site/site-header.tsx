@@ -10,7 +10,12 @@ import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher({ onDark = false }: { onDark?: boolean }) {
   return (
-    <label className={cn('inline-flex items-center gap-1.5 text-sm font-medium', onDark ? 'text-on-primary-muted' : 'text-text-2')}>
+    <label
+      className={cn(
+        'inline-flex items-center gap-1.5 text-sm font-medium',
+        onDark ? 'text-on-primary-muted' : 'text-text-2',
+      )}
+    >
       <Globe className="size-4" aria-hidden="true" />
       <span className="sr-only">Language</span>
       <select defaultValue="en" className="cursor-pointer rounded-md bg-transparent py-1 pr-1 text-sm font-medium">
@@ -60,9 +65,6 @@ export function SiteHeader() {
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
 
-  // The logo already links home, so the desktop bar skips "Home".
-  const desktopNav = navigation.filter((n) => n.href !== '/')
-
   return (
     <>
       <header className="site-header">
@@ -70,7 +72,7 @@ export function SiteHeader() {
           <div className="bar">
             <Logo />
             <nav aria-label="Primary" className="links seg-host">
-              {desktopNav.map((item) => (
+              {navigation.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -93,7 +95,13 @@ export function SiteHeader() {
 
       {/* The sheet sits outside the header: the header's backdrop-filter would trap a fixed-position child. */}
       {open && (
-        <div id="mobile-nav" className="sheet animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-label="Menu">
+        <div
+          id="mobile-nav"
+          className="sheet animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+        >
           <div className="wrap flex min-h-full flex-col">
             <div className="sheet-head">
               <Logo />

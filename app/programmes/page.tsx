@@ -30,7 +30,13 @@ export default function ProgrammesPage() {
           {programmes.map((p, i) => (
             <Reveal as="article" key={p.slug} className={`spanel ${i % 2 ? 'rev' : ''}`}>
               <div className="spanel-media">
-                <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 900px) 45vw, 100vw" className="object-cover" />
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt}
+                  fill
+                  sizes="(min-width: 900px) 45vw, 100vw"
+                  className={`object-cover ${p.imagePosition ?? ''}`}
+                />
               </div>
               <div className="spanel-copy">
                 <p className="eyebrow">Pillar {i + 1}</p>

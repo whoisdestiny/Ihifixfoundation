@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { CtaBand, PageHero, SectionHead } from '@/components/site/ui'
 import { partners } from '@/lib/site-data'
 
@@ -37,7 +38,18 @@ export default function PartnersPage() {
               <tbody>
                 {partners.map((p) => (
                   <tr key={p.name}>
-                    <th scope="row">{p.name}</th>
+                    <th scope="row">
+                      <span className="partner-cell">
+                        <span className="partner-cell-logo" aria-hidden="true">
+                          {p.logo ? (
+                            <Image src={p.logo.src} alt="" width={p.logo.width} height={p.logo.height} />
+                          ) : (
+                            <span className="partner-cell-text">{p.name}</span>
+                          )}
+                        </span>
+                        {p.name}
+                      </span>
+                    </th>
                     <td className="whitespace-nowrap">{p.period}</td>
                     <td>{p.type}</td>
                     <td className="text-foreground!">{p.impact}</td>

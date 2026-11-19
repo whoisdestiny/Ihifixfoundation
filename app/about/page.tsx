@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { CtaBand, Initials, PageHero, SectionHead, TextLink, TravelPattern, Words } from '@/components/site/ui'
+import { CtaBand, PageHero, SectionHead, TextLink, TravelPattern, Words } from '@/components/site/ui'
 import { Reveal } from '@/components/site/motion'
-import { board, leadership, milestones, site, values } from '@/lib/site-data'
+import { milestones, site, team, values } from '@/lib/site-data'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -10,10 +10,22 @@ export const metadata: Metadata = {
 }
 
 const approach = [
-  { title: 'Listen first', body: 'We start with community priorities, gathered through outreach, town halls and civic tech.' },
-  { title: 'Equip people', body: 'We combine in-demand skills with psycho-social support and a solution-based mindset.' },
-  { title: 'Strengthen systems', body: 'We work with government and civil society so change is backed by policy and budgets.' },
-  { title: 'Measure honestly', body: 'We define every metric, show its source and publish what we learn.' },
+  {
+    title: 'Listen first',
+    body: 'We start with community priorities, gathered through outreach, town halls and civic tech.',
+  },
+  {
+    title: 'Equip people',
+    body: 'We combine in-demand skills with psycho-social support and a solution-based mindset.',
+  },
+  {
+    title: 'Strengthen systems',
+    body: 'We work with government and civil society so change is backed by policy and budgets.',
+  },
+  {
+    title: 'Measure honestly',
+    body: 'We define every metric, show its source and publish what we learn.',
+  },
 ]
 
 export default function AboutPage() {
@@ -24,7 +36,16 @@ export default function AboutPage() {
         accent="for Africa."
         intro={`${site.name} is the social impact arm of the Ihifix Group, empowering the poor and vulnerable in Africa since ${site.founded}.`}
         crumbs={[{ label: 'About' }]}
-        art={{ src: '/images/human-capital.png', alt: 'Participants learning together at an Ihifix programme.' }}
+        art={{
+          src: '/images/photos/academy-facilitator.jpg',
+          alt: 'A facilitator in an Ihifix T-shirt leads a session at the Ihifix Digital Academy.',
+          position: 'object-[62%_center]',
+          inset: {
+            src: '/images/photos/academy-training.jpg',
+            alt: 'The facilitator hands out workbooks to participants during the training.',
+            position: 'object-[60%_center]',
+          },
+        }}
       />
 
       <section className="section">
@@ -100,7 +121,13 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="relative hidden aspect-[16/9] overflow-hidden rounded-[var(--radius-card)] md:block">
-              <Image src="/images/good-governance.png" alt="" fill sizes="26em" className="object-cover" />
+              <Image
+                src="/images/photos/academy-training.jpg"
+                alt="A facilitator hands out workbooks during an Ihifix Digital Academy session."
+                fill
+                sizes="26em"
+                className="object-cover object-[65%_center]"
+              />
             </div>
           </div>
           <ol className="trio">
@@ -117,25 +144,29 @@ export default function AboutPage() {
 
       <section id="leadership" className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Leadership" title="The people behind the work" />
-          <ul className="cards cards-2 m-0 list-none p-0">
-            {leadership.map((l) => (
-              <Reveal as="li" key={l.name} className="card flex items-center gap-5">
-                <Initials initials={l.initials} name={l.name} size="lg" />
-                <div>
-                  <h3 className="m-0 text-[1.1875rem]">{l.name}</h3>
-                  <p className="m-0">{l.role}</p>
+          <SectionHead
+            eyebrow="Leadership"
+            title="The people behind the work"
+            intro="Our founder and an independent board bring experience from development, education, finance and technology."
+          />
+          <ul className="team-grid">
+            {team.map((t) => (
+              <Reveal as="li" key={t.name} className="team-card">
+                <div className="team-photo">
+                  <Image
+                    src={t.photo}
+                    alt={`Portrait of ${t.name}`}
+                    fill
+                    sizes="(min-width: 1000px) 25vw, (min-width: 560px) 50vw, 100vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="team-body">
+                  <h3>{t.name}</h3>
+                  <p className="team-role">{t.role}</p>
+                  <p className="team-bio">{t.bio}</p>
                 </div>
               </Reveal>
-            ))}
-          </ul>
-          <h3 className="mb-5 mt-16 text-[1.3rem] tracking-[-0.02em]">Board of directors</h3>
-          <ul className="cards cards-3 m-0 list-none p-0">
-            {board.map((b) => (
-              <li key={b.name} className="card flex items-center gap-4 p-4!">
-                <Initials initials={b.initials} name={b.name} />
-                <span className="font-semibold">{b.name}</span>
-              </li>
             ))}
           </ul>
         </div>
@@ -156,7 +187,10 @@ export default function AboutPage() {
           <ul className="m-0 grid list-none gap-3 p-0">
             {[
               { label: 'Safeguarding policy', href: '/policies#safeguarding' },
-              { label: 'Privacy and data protection', href: '/policies#privacy' },
+              {
+                label: 'Privacy and data protection',
+                href: '/policies#privacy',
+              },
               { label: 'Reports and publications', href: '/resources' },
               { label: 'How we measure impact', href: '/impact#methodology' },
             ].map((l) => (

@@ -11,12 +11,12 @@ export function HomeHero() {
     <section className="hero">
       <div className="hero-bg" aria-hidden="true">
         <Image
-          src="/images/hero-digital-skills.png"
+          src="/images/photos/home-hero-summit.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[70%_center]"
+          className="object-cover object-[72%_center]"
         />
       </div>
       <div className="hero-shade" aria-hidden="true" />
@@ -107,26 +107,34 @@ export function ProgrammesGrid() {
           action={<TextLink href="/programmes">All programmes</TextLink>}
         />
         <ul className="cards cards-2 m-0 list-none p-0">
-          {programmes.map((p, i) => (
-            <Reveal as="li" key={p.slug}>
-              <Link href={`/programmes/${p.slug}`} className="prog">
-                <div className="prog-media">
-                  <Image src={p.image} alt="" fill sizes="(min-width: 700px) 50vw, 100vw" className="object-cover" />
-                </div>
-                <div className="prog-body">
-                  <p className="m-0 text-[var(--fs-xs)] font-semibold text-brand-text">Pillar {i + 1}</p>
-                  <h3>{p.title}</h3>
-                  <p>{p.short}</p>
-                  <div className="prog-foot">
-                    <span className="chip">
-                      {p.results[0].value} <span className="font-medium text-text-2">{p.results[0].label}</span>
-                    </span>
-                    <span className="link-arrow">Explore</span>
+          {programmes.map((p, i) => {
+            return (
+              <Reveal as="li" key={p.slug}>
+                <Link href={`/programmes/${p.slug}`} className="prog">
+                  <div className="prog-media">
+                    <Image
+                      src={p.image}
+                      alt={p.imageAlt}
+                      fill
+                      sizes="(min-width: 700px) 50vw, 100vw"
+                      className={`object-cover ${p.imagePosition ?? ''}`}
+                    />
                   </div>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+                  <div className="prog-body">
+                    <p className="m-0 text-[var(--fs-xs)] font-semibold text-brand-text">Pillar {i + 1}</p>
+                    <h3>{p.title}</h3>
+                    <p>{p.short}</p>
+                    <div className="prog-foot">
+                      <span className="chip">
+                        {p.results[0].value} <span className="font-medium text-text-2">{p.results[0].label}</span>
+                      </span>
+                      <span className="link-arrow">Explore</span>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            )
+          })}
         </ul>
       </div>
     </section>
@@ -150,8 +158,8 @@ export function Showcase() {
         <article className="spanel reveal">
           <div className="spanel-media">
             <Image
-              src="/images/human-capital.png"
-              alt="Participants at an Ihifix community training session."
+              src="/images/photos/afriscale-guests.jpg"
+              alt="Guests at the AfriScale and Ihifix event, seated in the front row."
               fill
               sizes="(min-width: 900px) 45vw, 100vw"
               className="object-cover"
@@ -172,7 +180,13 @@ export function Showcase() {
 
         <article className="spanel rev reveal">
           <div className="spanel-media">
-            <Image src={p.image} alt={p.imageAlt} fill sizes="(min-width: 900px) 45vw, 100vw" className="object-cover" />
+            <Image
+              src="/images/photos/afriscale-audience.jpg"
+              alt="Participants listening at an AfriScale and Ihifix session."
+              fill
+              sizes="(min-width: 900px) 45vw, 100vw"
+              className="object-cover object-[40%_center]"
+            />
           </div>
           <figure className="spanel-copy m-0">
             <p className="eyebrow">Voices from our programmes</p>
@@ -192,7 +206,14 @@ export function Showcase() {
 }
 
 export function PartnerStrip() {
-  const list = partners.slice(0, 10)
+  // One tile per organisation: partnerships that share a logo (e.g. two USAID programmes) appear once.
+  const seen = new Set<string>()
+  const tiles = partners.filter((p) => {
+    const key = p.logo?.src ?? p.name
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
   return (
     <section className="section overflow-hidden">
       <div className="wrap">
@@ -205,14 +226,21 @@ export function PartnerStrip() {
       </div>
       <div className="marquee-mask">
         <ul aria-label="Selected partners" className="sr-only">
-          {list.map((p) => (
-            <li key={p.name}>{p.name}</li>
+          {tiles.map((p) => (
+            <li key={p.name}>{p.logo?.label ?? p.name}</li>
           ))}
         </ul>
-        <div aria-hidden="true" className="animate-marquee flex w-max gap-3">
-          {[...list, ...list].map((p, i) => (
-            <span key={`${p.name}-${i}`} className="partner-pill">
-              {p.name}
+        <div aria-hidden="true" className="animate-marquee flex w-max gap-4">
+          {[...tiles, ...tiles].map((p, i) => (
+            <span key={`${p.name}-${i}`} className="partner-logo">
+              {p.logo ? (
+                <>
+                  <Image src={p.logo.src} alt="" width={p.logo.width} height={p.logo.height} />
+                  {p.logo.src.includes('kaduna') && <span className="partner-logo-text">Kaduna State Government</span>}
+                </>
+              ) : (
+                <span className="partner-logo-text">{p.name}</span>
+              )}
             </span>
           ))}
         </div>

@@ -30,7 +30,7 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
         title={p.title}
         intro={p.short}
         crumbs={[{ label: 'Programmes', href: '/programmes' }, { label: p.title }]}
-        art={{ src: p.image, alt: p.imageAlt }}
+        art={{ src: p.image, alt: p.imageAlt, position: p.imagePosition }}
       >
         <ButtonLink href="/partner-with-us">Fund this programme</ButtonLink>
         <ButtonLink href="#apply" variant="ghost">
@@ -77,7 +77,9 @@ export default async function ProgrammePage({ params }: { params: Promise<{ slug
               <div className="flex flex-col gap-5">
                 {p.results.map((r) => (
                   <p key={r.label} className="m-0 flex flex-col">
-                    <span className="text-[2rem] font-bold leading-none tracking-[-0.035em] text-primary-foreground">{r.value}</span>
+                    <span className="text-[2rem] font-bold leading-none tracking-[-0.035em] text-primary-foreground">
+                      {r.value}
+                    </span>
                     <span className="mt-2 text-on-primary-muted">{r.label}</span>
                   </p>
                 ))}
